@@ -1,0 +1,12 @@
+<div fxLayout="column">
+  <mat-nav-list>
+
+
+    <a mat-list-item>
+      <span [routerLink]="['/meeting']" (click)="toggleSidenav.emit()">Planifier un réunion</span>
+   </a>
+    <a mat-list-item>
+      <span [routerLink]="['/user-reservations']" (click)="toggleSidenav.emit()">Mes reservations</span>
+  </a>
+  </mat-nav-list>
+</div>

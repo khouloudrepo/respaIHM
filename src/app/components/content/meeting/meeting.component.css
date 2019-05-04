@@ -1,0 +1,31 @@
+
+  .card-buttons{
+    height: 10%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  .card-layout {
+ 
+    background-color: #f53b3b;
+    margin-left: 25%;
+    margin-top: 4%;
+    box-shadow: 2px 3px 2px rgb(83, 100, 104);
+
+  }
+.editor-layout{
+  height: 40%;
+}
+
+input[type="text"] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+input[type="text"]:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

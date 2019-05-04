@@ -1,0 +1,28 @@
+<p-table [value]="salles" [paginator]="true" [rows]="5" selectionMode="single" [(selection)]="salle"
+    (onRowSelect)="onRowSelect($event)" [responsive]="true">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="vin">Nom <p-sortIcon field="vin"></p-sortIcon>
+            </th>
+            <th pSortableColumn="year">Type <p-sortIcon field="year"></p-sortIcon>
+            </th>
+            <th pSortableColumn="brand">Capacité <p-sortIcon field="brand"></p-sortIcon>
+            </th>
+            <th pSortableColumn="color">Status<p-sortIcon field="color"></p-sortIcon>
+            </th>
+            <th style="width:4em"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" pTemplate="body" let-rowData let-salle>
+        <tr [pSelectableRow]="rowData" [pSelectableRowDisabled]="rowData.status=='occupee'">
+            <td><span class="ui-column-title">Nom</span>{{salle.nom}}</td>
+            <td><span class="ui-column-title">Type</span>{{salle.type}}</td>
+            <td><span class="ui-column-title">Capacité</span>{{salle.capacite}}</td>
+            <td><span class="ui-column-title">Status</span>{{salle.status}}</td>
+            <td>
+                <button pButton icon="pi pi-search" (click)="selectCar(car)"></button>
+            </td>
+        </tr>
+
+    </ng-template>
+</p-table>

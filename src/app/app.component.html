@@ -1,0 +1,22 @@
+<router-outlet></router-outlet>
+
+
+<ng-container>
+    
+    <mat-sidenav-container class="app-container">
+        <mat-sidenav #sidenav  mode="over"  class="sidenav">
+                
+            <app-sidebar (toggleSidenav)="sidenav.toggle()"></app-sidebar>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+                <mat-toolbar class="header">
+                        <app-header (toggleSidenav)="sidenav.toggle()"></app-header>
+                    </mat-toolbar>
+            <app-main></app-main>
+        </mat-sidenav-content>
+
+
+    </mat-sidenav-container>
+
+</ng-container>

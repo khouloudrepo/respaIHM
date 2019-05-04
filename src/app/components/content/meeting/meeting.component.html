@@ -1,0 +1,142 @@
+
+
+<form #myform="ngForm" (ngSubmit)="register(myform)" [formGroup]="form">
+    <mat-card class="card-buttons">
+        <div fxLayoutAlign="center">
+            <button mat-mini-fab color="primary" type="submit">
+                <mat-icon aria-label="label">save</mat-icon>
+            </button>
+            <div fxFlex="3"></div>
+            <button mat-mini-fab>
+                <mat-icon aria-label="label" type="button" (click)="save()">cancel</mat-icon>
+            </button>
+        </div>
+    </mat-card>
+
+
+    <p-fieldset legend="Nouvelle Réunion">
+
+
+        <div class="container col-md-10 ">
+            <div class="row form-group col-md-12">
+                <label for="sujet" class="col-sm-1 col-form-label">Sujet</label>
+                <div class="col-sm-4">
+                    <input type="text" id="sujet"  name="sujet" matInput formControlName="sujet"
+                        class="form-control col-sm-6" [ngClass]="{ 'is-invalid': submitted && f.sujet.errors }">
+
+                    <mat-error *ngIf="submitted && f.sujet.errors"> Veuillez saisir le sujet!
+                    </mat-error>
+                </div>
+            </div>
+            <div class="row form-group col-md-12">
+
+
+                <div class="col col-sm-4">
+                    <label for="startDate" class="col-sm-6 col-form-label">Date</label>
+                    <p-calendar [(ngModel)]="datetimeDebut" name="startDate" [disabledDays]="[0,6]"
+                        [readonlyInput]="true" required formControlName="startDate">
+                    </p-calendar>
+                    <mat-error *ngIf="submitted && f.startDate.errors"> Veuillez saisir le La date de votre
+                        réservation!
+                    </mat-error>
+                </div>
+
+                <div class="col col-sm-4">
+                    <label for="startTime" class="col-sm-6 col-form-label">Heure Debut:</label>
+                    <p-calendar [(ngModel)]="startTime" name="startTime" [timeOnly]="true" required
+                        formControlName="startTime" (onBlur)="compareTwoDates($event)"></p-calendar>
+                    <mat-error *ngIf="submitted && f.startTime.errors"> Veuillez saisir l'heure de debut
+                    </mat-error>
+                    <mat-error *ngIf="error.isError">{{error.errorMessage}}
+                        </mat-error>
+                </div>
+                <div class="col col-sm-4">
+
+                    <label for="startTime" class="col-sm-6 col-form-label">Heure Fin: </label>
+                    <p-calendar [(ngModel)]="endTime" name="endTime" (onBlur)="compareTwoDates($event)" [timeOnly]="true" required
+                        formControlName="endTime">
+                    </p-calendar>
+                    <mat-error *ngIf="submitted && f.endTime.errors"> Veuillez saisir l'heur du fin
+                    </mat-error>
+                    <mat-error *ngIf="error.isError">{{error.errorMessage}}
+                        </mat-error>
+                </div>
+            </div>
+            <div class="row form-group col-md-12">
+                <label class="col-sm-2 col-form-label">Participant </label>
+                <div class="col col-sm-8">
+                    <mat-form-field style="width: 100%;">
+                        <mat-chip-list formControlName="participant">
+                            <div *ngFor="let participant of participants">
+                                <mat-chip *ngIf="participant.nom" color="primary" selected="true"
+                                    [selectable]="selectable" [removable]="removable" (removed)="remove(participant)">
+
+                                    {{participant.nom}}
+
+                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                </mat-chip>
+
+                            </div>
+
+                        </mat-chip-list>
+                        <mat-error *ngIf="submitted && f.participant.errors"> Au moins un participant est obligatoire!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <button mat-icon-button type="button">
+                    <mat-icon aria-label="label" (click)="showParticipant()">add</mat-icon>
+                </button>
+            </div>
+            <div class="row form-group col-md-12">
+                <label class="col-sm-2 col-form-label">Salle </label>
+                <div class="col col-sm-8">
+                    <mat-form-field>
+
+                        <input matInput value="{{salle.nom}}" formControlName="salle">
+                    </mat-form-field>
+                    <mat-error *ngIf="submitted && f.endTime.errors"> Veuillez choisir une salle
+                    </mat-error>
+                </div>
+                <button mat-icon-button type="button" fxLayoutAlign="center">
+                    <mat-icon aria-label="label" (click)="show()">add</mat-icon>
+                </button>
+            </div>
+            <div class="row form-group col-md-12">
+                <label class="col-sm-2 col-form-label">Materiel </label>
+                <mat-form-field>
+                    <mat-chip-list>
+                        <div *ngFor="let equipement of equipements">
+                            <mat-chip *ngIf="equipement.nom" color="primary" selected="true" [selectable]="selectable"
+                                [removable]="removable" (removed)="remove(equipement)">
+
+                                {{equipement.nom}}
+
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                        </div>
+
+                    </mat-chip-list>
+                </mat-form-field>
+                <button mat-icon-button type="button" fxLayoutAlign="center">
+                    <mat-icon aria-label="label" (click)="showEquipement()">add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="row form-group col-md-10">
+            <mat-card class="card-layout center-block">
+
+
+                <mat-card-content fxLayout="row">
+
+                    <p-editor [(ngModel)]="text" name="message" [style]="{'height':'200px'}"></p-editor>
+
+                </mat-card-content>
+
+
+            </mat-card>
+
+        </div>
+
+
+    </p-fieldset>
+</form>
