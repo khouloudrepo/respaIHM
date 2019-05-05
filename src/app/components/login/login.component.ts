@@ -11,7 +11,6 @@ import { first } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
-  returnUrl: string;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -29,7 +28,6 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/meeting';
   }
   get f() { return this.loginForm.controls; }
   tryLogin() {
@@ -42,7 +40,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate(['/meeting']);
         },
         error => {
       
